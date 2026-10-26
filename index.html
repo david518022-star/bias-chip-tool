@@ -1,0 +1,476 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>強勢股技術面評分工具：大立光・雙鴻・聯亞・台達電</title>
+<style>
+:root{--navy:#13294b;--gold:#c9a227;--gold-bg:#fbf5e2;--ink:#1d2433;--ink-soft:#56607a;--ink-faint:#9aa3b5;--up:#d62728;--down:#1a9850;--line:#e3e6ee;--bg:#f6f7fb}
+body{margin:0;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:var(--ink)}
+header{background:var(--navy);color:#fff;padding:16px 20px;border-bottom:4px solid var(--gold)}header h1{margin:0;font-size:20px}header small{color:var(--gold)}
+nav{display:flex;flex-wrap:wrap;gap:6px;padding:10px 20px;background:#fff;border-bottom:1px solid var(--line)}nav button{border:1px solid var(--navy);background:#fff;color:var(--navy);padding:6px 14px;border-radius:4px;cursor:pointer}nav button.on{background:var(--navy);color:var(--gold)}
+main{padding:16px 20px;max-width:1200px;margin:auto}.tab{display:none}.tab.on{display:block}
+.box{background:#fff;border:1px solid var(--line);border-radius:6px;padding:8px;margin-bottom:8px}.box textarea{width:100%;font-family:monospace;font-size:12px}.box input{width:70px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}.card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px}
+.card h3{margin:0 0 6px;color:var(--navy)}.score{font-size:28px;font-weight:700;color:var(--navy)}.up{color:var(--up)}.down{color:var(--down)}.faint{color:var(--ink-faint);font-size:12px}
+.warn{background:var(--gold-bg);border-left:4px solid var(--gold);padding:6px 8px;margin:4px 0;font-size:13px}.tag{display:inline-block;background:var(--navy);color:var(--gold);padding:1px 8px;border-radius:10px;font-size:12px}
+table{border-collapse:collapse;width:100%;background:#fff;font-size:13px}td,th{border:1px solid var(--line);padding:4px 6px;text-align:right}th{background:var(--navy);color:#fff}td:first-child,th:first-child{text-align:left}
+.btn{background:var(--gold);border:0;padding:8px 18px;border-radius:4px;font-weight:700;cursor:pointer;color:var(--navy)}
+.wk td.u{background:#fde8e8;color:var(--up)}.wk td.d{background:#e6f4ea;color:var(--down)}
+</style></head><body>
+<header><h1>強勢股技術面評分工具</h1><small>大立光・雙鴻・聯亞・台達電｜資料至 2026-10-22｜來源：TWSE / TPEx 官方</small></header>
+<nav><button data-t="t1" class="on">強勢股評分排行</button><button data-t="t2">個股均線圖</button><button data-t="t3">週曆漲跌表</button></nav>
+<main>
+<section id="t1" class="tab on">
+<details><summary>資料輸入（日期 收盤 成交量[股]，每行一筆）</summary>
+<div class="box"><label>加權指數</label><textarea id="idx" rows="4">2026-07-28 41603.36
+2026-07-29 40039.18
+2026-07-30 39933.3
+2026-07-31 43119.75
+2026-08-03 43386.41
+2026-08-04 43360.66
+2026-08-05 44611.6
+2026-08-06 44396.7
+2026-08-07 44225.91
+2026-08-10 44928.76
+2026-08-11 45120.72
+2026-08-12 45518.07
+2026-08-13 46021.48
+2026-08-14 45811.01
+2026-08-17 45857.27
+2026-08-18 45308.68
+2026-08-19 44719.35
+2026-08-20 44933.74
+2026-08-21 45224.29
+2026-08-24 44762.32
+2026-08-25 45169.46
+2026-08-26 45832.62
+2026-08-27 45975.22
+2026-08-28 46331.45
+2026-08-31 46128.47
+2026-09-01 46948.72
+2026-09-02 46164.72
+2026-09-03 45857.66
+2026-09-04 46551.13
+2026-09-07 47326.27
+2026-09-08 47105.78
+2026-09-09 47183.36
+2026-09-10 46940.49
+2026-09-11 46184.85
+2026-09-14 45862.52
+2026-09-15 45511.49
+2026-09-16 45848.9
+2026-09-17 46288
+2026-09-18 47180.75
+2026-09-21 47718.84
+2026-09-22 47800.17
+2026-09-23 48157.29
+2026-09-24 48024.6
+2026-09-29 47631.96
+2026-09-30 47940.13
+2026-10-01 48353.49
+2026-10-02 48475.74
+2026-10-05 49712.04
+2026-10-06 49822.55
+2026-10-07 49806.37
+2026-10-08 49313.44
+2026-10-12 49301.96
+2026-10-13 48341.31
+2026-10-14 48625.83
+2026-10-15 46969.87
+2026-10-16 47111.26
+2026-10-19 46822.08
+2026-10-20 46292.93
+2026-10-21 46887.77
+2026-10-22 46041.43</textarea></div>
+<div class="box"><label>櫃買指數</label><textarea id="otc" rows="4">2026-07-28 352.42
+2026-07-29 334.24
+2026-07-30 326.23
+2026-07-31 347.85
+2026-08-03 362.89
+2026-08-04 375.03
+2026-08-05 383.75
+2026-08-06 391.37
+2026-08-07 384.19
+2026-08-10 391.61
+2026-08-11 391.68
+2026-08-12 402.02
+2026-08-13 406.12
+2026-08-14 400.95
+2026-08-17 398.32
+2026-08-18 390.83
+2026-08-19 384.79
+2026-08-20 389.96
+2026-08-21 387.27
+2026-08-24 386.1
+2026-08-25 389.41
+2026-08-26 395.66
+2026-08-27 400.38
+2026-08-28 402.83
+2026-08-31 401.7
+2026-09-01 410.77
+2026-09-02 406.96
+2026-09-03 395.25
+2026-09-04 402.48
+2026-09-07 409.33
+2026-09-08 407.19
+2026-09-09 408.09
+2026-09-10 405.24
+2026-09-11 395.52
+2026-09-14 394.67
+2026-09-15 388.73
+2026-09-16 399.21
+2026-09-17 398.17
+2026-09-18 412.68
+2026-09-21 412.57
+2026-09-22 415.17
+2026-09-23 413.76
+2026-09-24 412.99
+2026-09-29 412.25
+2026-09-30 417.07
+2026-10-01 418.82
+2026-10-02 426.93
+2026-10-05 432.48
+2026-10-06 430.86
+2026-10-07 430.46
+2026-10-08 426.71
+2026-10-12 427.9
+2026-10-13 414.31
+2026-10-14 420.13
+2026-10-15 396.9
+2026-10-16 400.26
+2026-10-19 394.05
+2026-10-20 387.88
+2026-10-21 395.42
+2026-10-22 381.69</textarea></div>
+<div class="box"><label>大立光 <input class="nm" value="大立光"> 代號 <input class="cd" value="3008"> 市場 <select class="mk"><option selected>TWSE</option><option>TPEx</option></select></label><textarea class="st" rows="6">2026-07-28 3900 2253064
+2026-07-29 3850 3408473
+2026-07-30 3715 2897129
+2026-07-31 4035 2970845
+2026-08-03 3960 1846958
+2026-08-04 4355 1870025
+2026-08-05 4575 4740431
+2026-08-06 4625 2304539
+2026-08-07 4385 1666019
+2026-08-10 4400 1949566
+2026-08-11 4355 1547540
+2026-08-12 4585 2154833
+2026-08-13 4660 2186337
+2026-08-14 4610 1840365
+2026-08-17 5070 3382103
+2026-08-18 5290 3723401
+2026-08-19 5550 3873944
+2026-08-20 5515 2952357
+2026-08-21 5610 3439678
+2026-08-24 5385 2364421
+2026-08-25 5720 2181353
+2026-08-26 6290 2001695
+2026-08-27 6915 2913470
+2026-08-28 7065 4885655
+2026-08-31 7650 3700248
+2026-09-01 7580 3399074
+2026-09-02 7810 2294173
+2026-09-03 7150 1688885
+2026-09-04 7400 1626455
+2026-09-07 6660 2481903
+2026-09-08 6500 1975094
+2026-09-09 6870 1404696
+2026-09-10 6720 1755962
+2026-09-11 6660 1987534
+2026-09-14 5995 2655512
+2026-09-15 6055 2988683
+2026-09-16 6225 2427181
+2026-09-17 6020 2145354
+2026-09-18 6430 2850571
+2026-09-21 6400 2092892
+2026-09-22 6405 2454340
+2026-09-23 6190 1689986
+2026-09-24 6245 1200518
+2026-09-29 6020 1784096
+2026-09-30 5945 1670350
+2026-10-01 6205 2312558
+2026-10-02 6290 1683166
+2026-10-05 6730 2621621
+2026-10-06 6855 2185813
+2026-10-07 6845 2150347
+2026-10-08 6660 1919149
+2026-10-12 7325 5911983
+2026-10-13 7275 5415934
+2026-10-14 6880 4289728
+2026-10-15 6605 3324466
+2026-10-16 6400 4812882
+2026-10-19 6245 2394650
+2026-10-20 5975 3151176
+2026-10-21 6170 2671131
+2026-10-22 6175 1827096</textarea></div><div class="box"><label>雙鴻 <input class="nm" value="雙鴻"> 代號 <input class="cd" value="3324"> 市場 <select class="mk"><option>TWSE</option><option selected>TPEx</option></select></label><textarea class="st" rows="6">2026-07-28 870 2052000
+2026-07-29 855 3260000
+2026-07-30 820 2139000
+2026-07-31 902 1628000
+2026-08-03 944 2906000
+2026-08-04 944 2390000
+2026-08-05 965 2638000
+2026-08-06 1060 7690000
+2026-08-07 1015 4609000
+2026-08-10 1010 3461000
+2026-08-11 1045 2337000
+2026-08-12 1050 2015000
+2026-08-13 1035 4531000
+2026-08-14 1010 2160000
+2026-08-17 1005 1512000
+2026-08-18 978 1655000
+2026-08-19 989 1542000
+2026-08-20 993 1249000
+2026-08-21 969 1196000
+2026-08-24 1015 2611000
+2026-08-25 1065 4011000
+2026-08-26 1075 3899000
+2026-08-27 1060 4186000
+2026-08-28 1140 6469000
+2026-08-31 1250 9673000
+2026-09-01 1375 9283000
+2026-09-02 1435 11002000
+2026-09-03 1350 2235000
+2026-09-04 1485 3081000
+2026-09-07 1440 2118000
+2026-09-08 1340 2306000
+2026-09-09 1385 1437000
+2026-09-10 1440 803000
+2026-09-11 1360 1081000
+2026-09-14 1305 948000
+2026-09-15 1260 4312000
+2026-09-16 1360 4834000
+2026-09-17 1385 6498000
+2026-09-18 1480 8399000
+2026-09-21 1520 4073000
+2026-09-22 1600 5558000
+2026-09-23 1595 4107000
+2026-09-24 1710 6452000
+2026-09-29 1630 3944000
+2026-09-30 1530 4370000
+2026-10-01 1525 3095000
+2026-10-02 1505 3524000
+2026-10-05 1550 4586000
+2026-10-06 1530 1772000
+2026-10-07 1525 2721000
+2026-10-08 1520 6102000
+2026-10-12 1540 2714000
+2026-10-13 1475 2592000
+2026-10-14 1490 2370000
+2026-10-15 1410 2184000
+2026-10-16 1425 2271000
+2026-10-19 1380 2671000
+2026-10-20 1395 3453000
+2026-10-21 1375 6026000
+2026-10-22 1360 4914000</textarea></div><div class="box"><label>聯亞 <input class="nm" value="聯亞"> 代號 <input class="cd" value="3081"> 市場 <select class="mk"><option>TWSE</option><option selected>TPEx</option></select></label><textarea class="st" rows="6">2026-07-28 1710 5570000
+2026-07-29 1540 4163000
+2026-07-30 1485 4754000
+2026-07-31 1630 359000
+2026-08-03 1790 669000
+2026-08-04 1965 312000
+2026-08-05 2160 375000
+2026-08-06 2375 5145000
+2026-08-07 2305 6003000
+2026-08-10 2535 3275000
+2026-08-11 2480 1163000
+2026-08-12 2725 1436000
+2026-08-13 2665 1872000
+2026-08-14 2540 1449000
+2026-08-17 2790 1586000
+2026-08-18 2925 5627000
+2026-08-19 2680 5487000
+2026-08-20 2780 4730000
+2026-08-21 2920 5069000
+2026-08-24 2765 3313000
+2026-08-25 2960 4734000
+2026-08-26 3255 7483000
+2026-08-27 3370 6604000
+2026-08-28 3305 3279000
+2026-08-31 3530 4221000
+2026-09-01 3425 2633000
+2026-09-02 3395 3371000
+2026-09-03 3120 4201000
+2026-09-04 3170 5533000
+2026-09-07 3070 3690000
+2026-09-08 2865 4085000
+2026-09-09 2850 5160000
+2026-09-10 2830 3088000
+2026-09-11 2810 2650000
+2026-09-14 2745 2727000
+2026-09-15 2675 2327000
+2026-09-16 2805 5759000
+2026-09-17 2720 4266000
+2026-09-18 2880 3325000
+2026-09-21 2875 2736000
+2026-09-22 2825 2370000
+2026-09-23 2680 4647000
+2026-09-24 2700 1932000
+2026-09-29 2650 1245000
+2026-09-30 2695 1418000
+2026-10-01 2660 1922000
+2026-10-02 2925 4649000
+2026-10-05 3000 7079000
+2026-10-06 2920 2492000
+2026-10-07 3140 5719000
+2026-10-08 2960 3050000
+2026-10-12 3025 1978000
+2026-10-13 2725 4654000
+2026-10-14 2880 3434000
+2026-10-15 2640 3269000
+2026-10-16 2545 4474000
+2026-10-19 2570 2996000
+2026-10-20 2490 2252000
+2026-10-21 2625 1766000
+2026-10-22 2375 3614000</textarea></div><div class="box"><label>台達電 <input class="nm" value="台達電"> 代號 <input class="cd" value="2308"> 市場 <select class="mk"><option selected>TWSE</option><option>TPEx</option></select></label><textarea class="st" rows="6">2026-07-28 1580 16516645
+2026-07-29 1495 22356467
+2026-07-30 1530 22598605
+2026-07-31 1640 31456334
+2026-08-03 1580 17410913
+2026-08-04 1620 20958807
+2026-08-05 1650 16778461
+2026-08-06 1680 10907572
+2026-08-07 1650 10432120
+2026-08-10 1815 10318139
+2026-08-11 1805 18963715
+2026-08-12 1790 9097777
+2026-08-13 1885 14453120
+2026-08-14 1885 14036875
+2026-08-17 1885 13421490
+2026-08-18 1820 11391040
+2026-08-19 1765 12608652
+2026-08-20 1745 11014621
+2026-08-21 1750 5768589
+2026-08-24 1735 4498318
+2026-08-25 1710 10537455
+2026-08-26 1750 10798374
+2026-08-27 1770 8876431
+2026-08-28 1830 13398406
+2026-08-31 1840 8899747
+2026-09-01 1865 8434152
+2026-09-02 1730 15977253
+2026-09-03 1760 10346094
+2026-09-04 1825 9195063
+2026-09-07 1850 7560958
+2026-09-08 1805 6331851
+2026-09-09 1795 8307925
+2026-09-10 1675 20489051
+2026-09-11 1620 15924565
+2026-09-14 1620 9470308
+2026-09-15 1670 14802962
+2026-09-16 1710 10673726
+2026-09-17 1685 10796328
+2026-09-18 1735 13051318
+2026-09-21 1875 19102054
+2026-09-22 1900 16957990
+2026-09-23 1900 9734322
+2026-09-24 1910 8983854
+2026-09-29 1835 14404821
+2026-09-30 1890 11094898
+2026-10-01 1905 6119811
+2026-10-02 1885 6064409
+2026-10-05 2005 17838513
+2026-10-06 2050 15043571
+2026-10-07 1990 10861290
+2026-10-08 1965 5522606
+2026-10-12 1900 11974441
+2026-10-13 1775 15203082
+2026-10-14 1785 9705664
+2026-10-15 1630 25335685
+2026-10-16 1635 8631796
+2026-10-19 1640 7775191
+2026-10-20 1605 9564249
+2026-10-21 1625 11497703
+2026-10-22 1560 10133625</textarea></div></details>
+<p><button class="btn" id="run">計算評分</button> <span class="faint">權重：RS 30%｜均線多頭 25%｜量價 20%｜近20日創高 15%｜拉回控制 10%</span></p>
+<div id="mkt"></div><div id="rank"></div></section>
+<section id="t2" class="tab"><select id="pick"></select><div id="chart"></div><div id="biaslist"></div></section>
+<section id="t3" class="tab"><select id="pick2"></select><div id="cal"></div></section>
+</main>
+<script>
+// 強勢股技術面評分引擎 (共用：HTML 與 Node)
+function parseSeries(txt){const m={};txt.trim().split(/\n+/).forEach(l=>{const p=l.trim().split(/[\s,\t]+/);if(p.length>=2&&/^\d{4}-\d{2}-\d{2}$/.test(p[0])){m[p[0]]={c:+p[1],v:p[2]!=null?+p[2]:0};}});return m;}
+function sma(a,n,i){if(i<n-1)return null;let s=0;for(let k=i-n+1;k<=i;k++)s+=a[k];return s/n;}
+function ret(a,n){const L=a.length-1;return L-n>=0?(a[L]/a[L-n]-1)*100:null;}
+function clamp(x){return Math.max(0,Math.min(100,x));}
+function zigzag(c,th){ // 8% 轉折
+  const piv=[];let dir=0,ext=c[0],ei=0;
+  for(let i=1;i<c.length;i++){
+    if(dir>=0){ if(c[i]>ext){ext=c[i];ei=i;} else if(c[i]<=ext*(1-th)){ if(dir===1||piv.length===0)piv.push({i:ei,p:ext,t:'H'}); dir=-1;ext=c[i];ei=i;} if(dir===0&&c[i]<ext){} }
+    else { if(c[i]<ext){ext=c[i];ei=i;} else if(c[i]>=ext*(1+th)){piv.push({i:ei,p:ext,t:'L'});dir=1;ext=c[i];ei=i;} }
+  }
+  return {piv,last:{i:ei,p:ext,t:dir<0?'L':'H'}};
+}
+function analyze(name,code,mkt,stock,idx,otc){
+  const dates=Object.keys(stock).filter(d=>idx[d]&&otc[d]).sort(); // 共同日期對齊
+  const c=dates.map(d=>stock[d].c),v=dates.map(d=>stock[d].v),ic=dates.map(d=>idx[d].c),oc=dates.map(d=>otc[d].c);
+  const L=c.length-1,ma=n=>c.map((_,i)=>sma(c,n,i));
+  const m5=ma(5),m10=ma(10),m20=ma(20),m30=ma(30),m60=ma(60);
+  const chg=c.map((x,i)=>i?(x/c[i-1]-1)*100:0);
+  // RS 30%
+  const r20=ret(c,20),ir20=ret(ic,20),or20=ret(oc,20),r5=ret(c,5),ir5=ret(ic,5),or5=ret(oc,5);
+  const bench=mkt==='TPEx'?or20:ir20;
+  const rsDiff=r20-ir20; const sRS=clamp(50+rsDiff*2.5);
+  // 均線多頭排列 25%
+  let maPts=0;const chk=[c[L]>m5[L],m5[L]>m10[L],m10[L]>m20[L],m20[L]>(m60[L]??m30[L]),m20[L]>m20[L-5]];chk.forEach(b=>b&&(maPts+=20));
+  const sMA=maPts;
+  // 量價健康度 20% (含漲停處理)
+  let good=0,tot=0;const av20=sma(v,20,L);
+  for(let i=L-9;i<=L;i++){const avg=sma(v,20,i-1)||av20;const lim=chg[i]>=9.5;tot++;
+    if(chg[i]>0&&(v[i]>=avg||lim))good++; else if(chg[i]<=0&&v[i]<avg)good++; }
+  const sVol=clamp(good/tot*100);
+  // 近20日創高 15%
+  const hi20=Math.max(...c.slice(L-19)),lo20=Math.min(...c.slice(L-19));
+  const isHigh=c[L]>=hi20;const sHigh=isHigh?100:clamp(100-(1-c[L]/hi20)*100*8);
+  // 拉回控制 10%
+  let peak=c[L-19],mdd=0;for(let i=L-19;i<=L;i++){peak=Math.max(peak,c[i]);mdd=Math.min(mdd,(c[i]/peak-1)*100);}
+  const sPB=clamp(100+mdd*5);
+  const score=+(sRS*.3+sMA*.25+sVol*.2+sHigh*.15+sPB*.1).toFixed(1);
+  const rebound=(c[L]/lo20-1)*100;
+  const volRatio=v[L]/av20;
+  const bias=c.map((x,i)=>m5[i]?(x/m5[i]-1)*100:null);
+  // zigzag 8%
+  const z=zigzag(c,0.08);const allP=z.piv.concat([z.last]);
+  let swingHi=null,swingLo=null;for(let k=allP.length-1;k>=0;k--){if(!swingHi&&allP[k].t==='H')swingHi=allP[k];if(swingHi&&allP[k].t==='L'&&allP[k].i<swingHi.i){swingLo=allP[k];break;}}
+  if(!swingHi)swingHi={i:c.indexOf(Math.max(...c)),p:Math.max(...c)};
+  const pbNow=(c[L]/swingHi.p-1)*100;
+  const zones=[15,18,20,22].map(p=>({p,price:+(swingHi.p*(1-p/100)).toFixed(2)}));
+  // 分類
+  let type='整理/弱勢';
+  if(sMA>=80&&r20>15&&c[L]>m5[L])type='主升段';else if(c[L]>m30[L]&&m30[L]>m30[L-5])type='波段趨勢股';
+  const warn=[];const b=bias[L];
+  if(b>=6)warn.push(`5日乖離 ${b.toFixed(2)}% ≥6%：過熱，勿追高`);else if(b>=5)warn.push(`5日乖離 ${b.toFixed(2)}% ≥5%：留意短線過熱`);
+  if(c[L]<m5[L])warn.push('收盤跌破5日線：短線轉弱');
+  if(type==='主升段'&&c[L]<m10[L])warn.push('主升段跌破10日線，留意結束');
+  if(type!=='主升段'&&c[L]<m30[L])warn.push('收盤低於30日線：波段趨勢轉弱');
+  if(volRatio>=2&&chg[L]<0)warn.push('爆量收黑：留意出貨');
+  if(pbNow<=-15)warn.push(`自波段高點拉回 ${pbNow.toFixed(1)}%：已進入拉回進場觀察區`);
+  return {name,code,mkt,dates,c,v,m5,m10,m30,bias,chg,score,parts:{sRS,sMA,sVol,sHigh,sPB},rsDiff,r5,r20,ir5,ir20,or5,or20,vsIdx:r20-ir20,vsOtc:r20-or20,rebound,volRatio,av20,hi20,isHigh,mdd,swingHi:{date:dates[swingHi.i],p:swingHi.p},swingLo:swingLo?{date:dates[swingLo.i],p:swingLo.p}:null,pbNow,zones,ma5:m5[L],type,warn,bias5:b,close:c[L],last:dates[L],limitUp:chg[L]>=9.5};
+}
+function market(idx,otc){const d=Object.keys(idx).filter(x=>otc[x]).sort();const a=d.map(x=>idx[x].c),b=d.map(x=>otc[x].c);
+  const r={i5:ret(a,5),i20:ret(a,20),o5:ret(b,5),o20:ret(b,20),il:a[a.length-1],ol:b[b.length-1],last:d[d.length-1]};
+  r.concl=(r.o20>r.i20&&r.o5>r.i5)?'櫃買強於大盤：中小型股資金活絡，櫃買股較具攻擊性':(r.o20<r.i20&&r.o5<r.i5)?'大盤強於櫃買：資金集中權值股，櫃買股宜挑強勢個股':'強弱分歧：短中期互有領先，宜觀察資金輪動';return r;}
+if(typeof module!=='undefined')module.exports={parseSeries,analyze,market};
+
+let RES=[];const f=(x,d=2)=>x==null?'-':(+x).toFixed(d),pc=x=>`<span class="${x>=0?'up':'down'}">${x>=0?'+':''}${f(x)}%</span>`;
+function run(){const idx=parseSeries(document.getElementById('idx').value),otc=parseSeries(document.getElementById('otc').value);
+RES=[...document.querySelectorAll('.box textarea.st')].map(t=>{const b=t.parentNode;return analyze(b.querySelector('.nm').value,b.querySelector('.cd').value,b.querySelector('.mk').value,parseSeries(t.value),idx,otc);}).sort((a,b)=>b.score-a.score);
+const M=market(idx,otc);
+document.getElementById('mkt').innerHTML=`<div class="card"><h3>大盤 vs 櫃買 對照</h3><table><tr><th></th><th>收盤</th><th>5日</th><th>20日</th></tr><tr><td>加權指數</td><td>${f(M.il)}</td><td>${pc(M.i5)}</td><td>${pc(M.i20)}</td></tr><tr><td>櫃買指數</td><td>${f(M.ol)}</td><td>${pc(M.o5)}</td><td>${pc(M.o20)}</td></tr></table><div class="warn">${M.concl}</div></div><br>`;
+document.getElementById('rank').innerHTML='<div class="grid">'+RES.map((r,i)=>`<div class="card"><h3>#${i+1} ${r.name} ${r.code} <span class="tag">${r.type}</span></h3>
+<div class="score">${r.score}<span class="faint"> / 100</span></div>
+<div>收盤 ${f(r.close)}（${pc(r.chg[r.chg.length-1])}）${r.limitUp?'<b class="up">漲停</b>':''}｜5日線 ${f(r.ma5)}｜5日乖離 ${pc(r.bias5)}</div>
+<table><tr><th>項目</th><th>分數</th></tr><tr><td>RS vs 加權 (30%)</td><td>${f(r.parts.sRS,0)}</td></tr><tr><td>均線多頭排列 (25%)</td><td>${f(r.parts.sMA,0)}</td></tr><tr><td>量價健康度 (20%)</td><td>${f(r.parts.sVol,0)}</td></tr><tr><td>近20日創高 (15%)</td><td>${f(r.parts.sHigh,0)}</td></tr><tr><td>拉回控制 (10%)</td><td>${f(r.parts.sPB,0)}</td></tr></table>
+<div class="faint">反彈幅度(距20日低) ${f(r.rebound)}%｜20日最大回檔 ${f(r.mdd)}%</div>
+<div>基準比較法：20日 vs大盤 ${pc(r.vsIdx)}｜vs櫃買 ${pc(r.vsOtc)}</div>
+<div>流量指標法：量/20日均量 <b>${f(r.volRatio)}x</b></div>
+<div>8% 拉回進場法：波段高 ${f(r.swingHi.p)}（${r.swingHi.date}），目前拉回 ${pc(r.pbNow)}<br>${r.zones.map(z=>`${z.p}%→${f(z.price)}`).join('｜')}</div>
+${r.warn.map(w=>`<div class="warn">⚠ ${w}</div>`).join('')}</div>`).join('')+'</div>';
+['pick','pick2'].forEach(id=>{const s=document.getElementById(id);s.innerHTML=RES.map((r,i)=>`<option value="${i}">${r.name} ${r.code}</option>`).join('');});drawChart();drawCal();}
+function drawChart(){const r=RES[+document.getElementById('pick').value||0];const W=1000,H=380,P=50,n=r.c.length;const all=[...r.c,...r.m30.filter(x=>x)];const mn=Math.min(...all),mx=Math.max(...all);
+const X=i=>P+i*(W-2*P)/(n-1),Y=v=>H-P-(v-mn)/(mx-mn)*(H-2*P);const path=(a,col,w)=>`<path d="${a.map((v,i)=>v==null?'':`${a.slice(0,i).some(x=>x!=null)?'L':'M'}${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join('')}" fill="none" stroke="${col}" stroke-width="${w}"/>`;
+let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="background:#fff;border:1px solid var(--line)">`;for(let k=0;k<=4;k++){const v=mn+(mx-mn)*k/4;s+=`<line x1="${P}" x2="${W-P}" y1="${Y(v)}" y2="${Y(v)}" stroke="#eee"/><text x="4" y="${Y(v)+4}" font-size="11" fill="#9aa3b5">${v.toFixed(0)}</text>`;}
+for(let k=0;k<6;k++){const i=Math.round(k*(n-1)/5);s+=`<text x="${X(i)-28}" y="${H-20}" font-size="11" fill="#9aa3b5">${r.dates[i]}</text>`;}
+s+=path(r.c,'#13294b',2)+path(r.m5,'#d62728',1.2)+path(r.m10,'#c9a227',1.2)+path(r.m30,'#1a9850',1.2);
+r.bias.forEach((b,i)=>{if(b!=null&&Math.abs(b)>=5)s+=`<circle cx="${X(i)}" cy="${Y(r.c[i])}" r="5" fill="${b>0?'#d62728':'#1a9850'}"><title>${r.dates[i]} 乖離 ${b.toFixed(2)}%</title></circle>`;});
+s+=`<text x="${P}" y="18" font-size="12"><tspan fill="#13294b">■收盤</tspan> <tspan fill="#d62728">■MA5</tspan> <tspan fill="#c9a227">■MA10</tspan> <tspan fill="#1a9850">■MA30</tspan> ●|乖離|≥5%</text></svg>`;
+document.getElementById('chart').innerHTML=s;
+document.getElementById('biaslist').innerHTML='<h3>乖離率歷史（vs MA5）</h3><table><tr><th>日期</th><th>收盤</th><th>漲跌</th><th>MA5</th><th>乖離</th><th>量</th></tr>'+r.dates.map((d,i)=>[d,i]).reverse().filter(([d,i])=>r.m5[i]).map(([d,i])=>`<tr><td>${d}</td><td>${f(r.c[i])}</td><td>${pc(r.chg[i])}</td><td>${f(r.m5[i])}</td><td>${pc(r.bias[i])}${r.bias[i]>=6?' ⚠⚠':r.bias[i]>=5?' ⚠':''}</td><td>${r.v[i].toLocaleString()}</td></tr>`).join('')+'</table>';}
+function drawCal(){const r=RES[+document.getElementById('pick2').value||0];const wk={};r.dates.forEach((d,i)=>{if(!i)return;const dt=new Date(d+'T00:00:00');const mon=new Date(dt);mon.setDate(dt.getDate()-(dt.getDay()+6)%7);const k=mon.toISOString().slice(0,10);(wk[k]=wk[k]||{})[dt.getDay()]=r.chg[i];});
+document.getElementById('cal').innerHTML='<table class="wk"><tr><th>週（週一）</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>上漲天數</th></tr>'+Object.keys(wk).sort().reverse().map(k=>{const w=wk[k];let up=0,cnt=0;const cells=[1,2,3,4,5].map(d=>{if(w[d]==null)return '<td class="faint">休</td>';cnt++;if(w[d]>0)up++;return `<td class="${w[d]>0?'u':w[d]<0?'d':''}">${w[d]>0?'+':''}${w[d].toFixed(2)}%</td>`;}).join('');return `<tr><td>${k}</td>${cells}<td>${up}/${cnt}</td></tr>`;}).join('')+'</table>';}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button,.tab').forEach(e=>e.classList.remove('on'));b.classList.add('on');document.getElementById(b.dataset.t).classList.add('on');});
+document.getElementById('run').onclick=run;document.getElementById('pick').onchange=drawChart;document.getElementById('pick2').onchange=drawCal;run();
+</script></body></html>
